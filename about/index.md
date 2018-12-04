@@ -1,14 +1,14 @@
 ---
 layout: page
-title: About the Theme
+title: 关于我
 tags: [about, Jekyll, theme, moon]
 date: 2016-03-21
 comments: false
 ---
     
-<center><a href="http://taylantatli.github.io/Moon"><b>Moon</b></a> is a minimal, one column jekyll theme.</center>
+<center>我就是我，颜色不一样的烟花</center>
 
-## Features
+## 基本资料
 * Minimal, you can focus on your content
 * Responsive
 * Disqus integration
@@ -20,11 +20,13 @@ comments: false
 * Simple navigation menu
 * MathJax support
 
-## Preview
+## 教育经历
 
+## 工作经历
+
+## 此处应有自拍
 {% capture images %}
-    https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png
-    https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png
+    http://xxhlovetyn.top/assets/img/photo.jpg
 {% endcapture %}
 {% include gallery images=images caption="Screenshots of Moon Theme" cols=2 %}
 
