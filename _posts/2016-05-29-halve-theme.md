@@ -75,7 +75,7 @@ Used to generate absolute urls in `sitemap.xml`, `feed.xml`, and for generating 
 Examples:
 
 {% highlight yaml %}
-url: http://taylantatli.me/Halve
+url: http://xxhlovetyn.top
 url: http://localhost:4000
 url: //cooldude.github.io
 url:

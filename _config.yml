@@ -1,7 +1,7 @@
 # Site
 title: JustX
 description: 一名前端菜鸟的博客
-url: https://github.com/Justxxh
+url: http://xxhlovetyn.top
 logo: avatar.jpeg                                       # Site logo
 # locale: en_US
 locale: zh_CN
@@ -48,7 +48,7 @@ github:             Justxxh
 #dribbble:          username
 #youtube:           username
 #soundcloud:        username
-#weibo:             username
+# weibo:             username
 #flickr:            username
 #codepen:           username
 #keybase:           username
