@@ -1,12 +1,98 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>hi</title>
+    <title>canvs绕边btn</title>
 </head>
+<style>
+    body {
+        background: black;
+    }
+
+    .starBrnBox {
+        width: 300px;
+        height: 80px;
+        position: absolute;
+        z-index: 10;
+        /* top: calc(50% - .533333rem); */
+        top: 70%;
+        left: calc(50% - 150px);
+    }
+</style>
+
 <body>
-    <h1>hi</h1>
+    <div class="starBrnBox">
+        <canvas style="width: 100%;height: 100%;" id="startBtn"></canvas>
+    </div>
 </body>
+<script>
+    // 绕边按钮canvas动画
+    let ctxobj = document.getElementById('startBtn'),
+        ctx = ctxobj.getContext('2d'),
+        text = 'start',
+        textW = ctx.measureText(text).width,
+        curX = 0,
+        curY = 0;
+
+    function draw() {
+        ctx.font = 'normal 70px FangSong_GB2312 ';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 4;
+        ctx.fillText(text, 150 - textW / 2, ctxobj.height / 2);
+        if (curX == 0 && curY < ctxobj.height) {
+            ctx.clearRect(0, 0, ctxobj.width, ctxobj.height);
+            curY += 3;
+            ctx.beginPath();
+            // 左侧
+            ctx.moveTo(0, 20);
+            ctx.lineTo(curX, curY);
+            // 右侧
+            ctx.moveTo(ctxobj.width, ctxobj.height - 20);
+            ctx.lineTo(ctxobj.width, ctxobj.height - 20 - curY);
+            ctx.stroke();
+        } else if (curY == ctxobj.height && curX < (ctxobj.width - 20)) {
+            ctx.clearRect(0, 0, ctxobj.width, ctxobj.height);
+            ctx.beginPath();
+            // 左侧
+            ctx.moveTo(0, 20);
+            ctx.lineTo(0, curY);
+            curX += 3;
+            ctx.lineTo(curX, curY);
+
+            // 右侧
+            ctx.moveTo(ctxobj.width, ctxobj.height - 20);
+            ctx.lineTo(ctxobj.width, 0);
+            // curX+=3;
+            ctx.lineTo(ctxobj.width - curX, 0);
+
+            ctx.stroke();
+        } else {
+            ctx.clearRect(0, 0, ctxobj.width, ctxobj.height);
+            curY = 0;
+            curX = 0;
+            curY += 3;
+            ctx.beginPath();
+            ctx.moveTo(0, 20);
+            ctx.lineTo(curX, curY);
+            ctx.stroke();
+        }
+
+        // start 文字
+        ctx.font = 'normal 70px FangSong_GB2312 ';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'white';
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 8;
+        ctx.fillText(text, 150 - textW / 2, ctxobj.height / 2);
+        window.requestAnimationFrame(draw);
+    }
+    draw();
+</script>
+
 </html>
