@@ -22,4 +22,4 @@ comments: false
 {% capture images %}
     http://xxhlovetyn.top/assets/img/photo.jpg
 {% endcapture %}
-{% include gallery images=images caption="Screenshots of Moon Theme" cols=2 %}
+{% include gallery images=images caption="图片转自网络，侵删" cols=2 %}
