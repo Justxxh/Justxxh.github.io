@@ -6,7 +6,7 @@ date: 2016-03-21
 comments: false
 ---
     
-<center>我就是我，颜色不一样的烟花</center>
+<center>我就是我，看自己都上火</center>
 
 ## 基本资料
 * 待完善
