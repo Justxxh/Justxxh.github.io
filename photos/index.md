@@ -24,3 +24,4 @@ comments: false
     http://xxhlovetyn.top/assets/img/suishou2.png
     http://xxhlovetyn.top/assets/img/suishou3.png
 {% endcapture %}
+{% include gallery images=images caption="随手记录生活" cols=2 %}
