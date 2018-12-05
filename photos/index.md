@@ -21,7 +21,7 @@ comments: false
 
 {% capture images %}
     http://xxhlovetyn.top/assets/img/suishou1.png
-    http://xxhlovetyn.top/assets/img/suishou2.png
-    http://xxhlovetyn.top/assets/img/suishou3.png
+    http://xxhlovetyn.top/assets/img/suishou2.jpg
+    http://xxhlovetyn.top/assets/img/suishou3.jpg
 {% endcapture %}
 {% include gallery images=images caption="随手记录生活" cols=2 %}
