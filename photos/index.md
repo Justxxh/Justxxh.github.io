@@ -20,7 +20,7 @@ comments: false
 ## 随手拍
 
 {% capture images %}
-    http://xxhlovetyn.top/assets/img/suishou1.jpg
-    http://xxhlovetyn.top/assets/img/suishou2.jpg
-    http://xxhlovetyn.top/assets/img/suishou3.jpg
+    http://xxhlovetyn.top/assets/img/suishou1.png
+    http://xxhlovetyn.top/assets/img/suishou2.png
+    http://xxhlovetyn.top/assets/img/suishou3.png
 {% endcapture %}
