@@ -39,6 +39,24 @@ layout: compress
             </div>
         </div>
         {% if page.comments and site.disqus_shortname %}<section id="disqus_thread" class="animated fadeInUp"></section><!-- /#disqus_thread -->{% endif %}
+
+        {% if site.gitment.id %}
+        <div id="container"></div>
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <script>
+            var gitment = new Gitment({
+                // id: gitment.id, // 可选。默认为 location.href  比如我本人的就删除了
+                owner: 'Justxxh',
+                repo: 'Justxxh.github.io',
+                oauth: {
+                    client_id: gitment.id,
+                    client_secret: gitment.secret,
+                },
+            })
+            gitment.render('container')
+        </script>
+        {% endif %}
     </header>
     {% include scripts.html %}
     {% if site.mathjax == true %}
