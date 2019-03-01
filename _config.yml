@@ -25,7 +25,7 @@ sass:
   style:            compressed
 
 # Comments
-# disqus_shortname:   JustX
+disqus_shortname:   JustX
 gitment:
   id: 625b3cb028c27bf3d8ec
   secret: 48d3c9ae1441d7a6eed58f2080066cc19ad33115
