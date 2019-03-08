@@ -24,8 +24,10 @@ comments: true
 <ul>
 	<li>首先创建目录，新建app.js文件,安装相关依赖</li>
 </ul>
+
 ```js
-    npm i superagent cheerio fs
+	npm i superagent cheerio fs
+
 ```
 </section>
 
