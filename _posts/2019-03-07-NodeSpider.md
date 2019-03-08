@@ -20,6 +20,8 @@ comments: true
 通过node写爬虫代码抓取网络图片并下载到本地文件夹，刚好最近也在学习node作为一个练习也是不错的
 本次的环境是在Windows下，之后在macbook上也测试过正常运行 只是要注意一下存储路径的问题
 思路：
+</section>
+
 
 <ul>
 	<li>首先创建目录，新建app.js文件,安装相关依赖</li>
@@ -119,5 +121,6 @@ superagent.get(url)
     http://justx.cn:8088/assets/img/0308-1.png
 {% endcapture %}
 {% include gallery images=images caption="" cols=2 %}
+
 <p>Windows壁纸设置为相册 随机模式即可，运行程序几秒拥有自己的壁纸集</p>
 <em><mark>tips：</mark>以上为本次爬虫实践记录，初次实践可能存在的问题还望各位指出，也希望能给正在学习的朋友提供一点思路，最后感谢各位浏览</em>
