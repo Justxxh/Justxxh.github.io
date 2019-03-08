@@ -27,10 +27,7 @@ comments: true
 
 ```js
 	npm i superagent cheerio fs
-
 ```
-</section>
-
 
 ```js
 	package.json依赖如下
