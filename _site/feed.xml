@@ -1,9 +1,261 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://justx.cn:8088/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://justx.cn:8088/feed.xml" rel="self" type="application/atom+xml" /><link href="http://justx.cn:8088/" rel="alternate" type="text/html" /><updated>2018-12-05T14:07:04+08:00</updated><id>http://justx.cn:8088/</id><title type="html">JustX</title><subtitle>没有代码就没有伤害 （°Д°）</subtitle><entry><title type="html">我又双叒叕搭建了自己的博客</title><link href="http://justx.cn:8088/first/" rel="alternate" type="text/html" title="我又双叒叕搭建了自己的博客" /><published>2018-12-05T01:34:34+08:00</published><updated>2018-12-05T01:34:34+08:00</updated><id>http://justx.cn:8088/first</id><content type="html" xml:base="http://justx.cn:8088/first/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://justx.cn:8088/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://justx.cn:8088/feed.xml" rel="self" type="application/atom+xml" /><link href="http://justx.cn:8088/" rel="alternate" type="text/html" /><updated>2019-03-08T13:13:32+08:00</updated><id>http://justx.cn:8088/</id><title type="html">JustX</title><subtitle>没有代码就没有伤害 （°Д°）</subtitle><entry><title type="html">[Node 爬虫]快速制作自己的桌面壁纸</title><link href="http://justx.cn:8088/NodeSpider/" rel="alternate" type="text/html" title="[Node 爬虫]快速制作自己的桌面壁纸" /><published>2019-03-08T07:50:40+08:00</published><updated>2019-03-08T07:50:40+08:00</updated><id>http://justx.cn:8088/NodeSpider</id><content type="html" xml:base="http://justx.cn:8088/NodeSpider/">&lt;p&gt;##背景&lt;/p&gt;
+
+&lt;p&gt;这几天家用台式机莫名卡顿，直至某晚女友看到我wallpaper engine那骚气的壁纸时说了一句：真丑，我帮你换几张壁纸吧。 就在她一顿百度之后 准备另存为，突然就各种卡死崩溃，强制关掉浏览器之后再次操作依旧如此，我一顿排查无果，恰好最近觉得电脑很奇怪，最后只能启用终极方案—— 重装大法，经过一顿操作 安装各种驱动，常用软件及游戏的下载，最终搞定，可是细看总觉得哪里不对，猛然想起，原来是这该死的默认壁纸拉低了我的档次，之前心爱的搜狗壁纸也停止维护，主要也是不想安装一堆软件，于是乎开始了壁纸的搜索，女友在知乎上找到很多好看的壁纸，无奈回答里都是直接发图没有网盘链接，看着这191张图片（我怎么会一个个书，当然是是爬虫下载的时候统计的[Smirk]），这要一个个保存得到什么时候去，于是就有了后面的故事…&lt;/p&gt;
+
+&lt;h2 id=&quot;需解决的问题及思路&quot;&gt;需解决的问题及思路&lt;/h2&gt;
+
+&lt;section&gt;
+通过node写爬虫代码抓取网络图片并下载到本地文件夹，刚好最近也在学习node作为一个练习也是不错的
+本次的环境是在Windows下，之后在macbook上也测试过正常运行 只是要注意一下存储路径的问题
+思路：
+
+&lt;ul&gt;
+	&lt;li&gt;首先创建目录，新建app.js文件,安装相关依赖&lt;/li&gt;
+    &lt;pre&gt;
+    	&lt;code&gt;
+    		npm i superagent cheerio fs
+    	&lt;/code&gt;
+    &lt;/pre&gt;
+    &amp;lt;/li&amp;gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	&lt;span class=&quot;kr&quot;&gt;package&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;依赖如下&lt;/span&gt;
+		
+	   &lt;span class=&quot;s2&quot;&gt;&quot;dependencies&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;s2&quot;&gt;&quot;cheerio&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;^1.0.0-rc.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+           &lt;span class=&quot;s2&quot;&gt;&quot;fs&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;0.0.1-security&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+           &lt;span class=&quot;s2&quot;&gt;&quot;superagent&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;^4.1.0&quot;&lt;/span&gt;
+         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+	&lt;li&gt;通过superagent发送http请求获取资源，拿到html&lt;/li&gt;
+    &lt;li&gt;cheerio 是node.js的jquery库通过这个解析DOM，&lt;/li&gt;
+    &lt;li&gt;fs 就用于新建文件夹和保存文件&lt;/li&gt;
+    &amp;lt;/li&amp;gt;
+&lt;/ul&gt;
+&lt;section&gt;
+大致流程就如上所说，现在找一个自己想要爬取的网站，我这里用的是
+    &lt;mark&gt;&lt;a href=&quot;https://www.zhihu.com/question/37914433&quot; target=&quot;_blank&quot;&gt;知乎的某个回答&lt;/a&gt; 在此感谢回答者提供这些好看的壁纸！&lt;/mark&gt;代码很简单，都有写注释，下面贴出代码
+&lt;/section&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cm&quot;&gt;/**
+ * JustX
+ * 2019-03-07 22:48:03
+ */&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;superagent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'superagent'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//发送http请求&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cheerio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'cheerio'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//获取dom&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fs'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//创建文件、文件夹&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 知乎回答壁纸地址&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'https://www.zhihu.com/question/37914433'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 图片爬取地址&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'D:\\'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//  指定路径 \ 转义符&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'wallpaper'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 文件夹名&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;imgSelectorName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'data-original'&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// 获取图片arr 原图地址属性 data-original&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;superagent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;//设置请求头&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;Connection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;keep-alive&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 判断是否存在&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'创建文件夹'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;//创建放图片的文件夹&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;mkdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;err&quot;&gt; &lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 获取dom对象&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cheerio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 循环&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exists&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readdirSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beforeNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 之前存在的图片数&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;beforeNum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'img.origin_image'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// 限制条件 大于1920*1080&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// if($(el).attr('width') &amp;gt;= 1920 &amp;amp;&amp;amp; $(el).attr('height') &amp;gt;= 1080){&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgurl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;el&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;attr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgSelectorName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 获取图片arr 原图地址属性 data-original&lt;/span&gt;
+                    &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;beforeNum&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;imgnam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'pic'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//拿到图片的标题&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// 利用request模块保存图片&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;superagent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;imgurl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createWriteStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgfolder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;imgnam&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// }&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;`此次下载&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;张&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;共&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;beforeNum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;张`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;成果&quot;&gt;成果&lt;/h2&gt;
+
+&lt;figure class=&quot;half&quot;&gt;
+    
+    &lt;a href=&quot;http://justx.cn:8088/assets/img/0308-1.png&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/0308-1.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Windows壁纸设置为相册 随机模式即可，运行程序几秒拥有自己的壁纸集
+&lt;em&gt;&lt;mark&gt;tips：&lt;/mark&gt;以上为本次爬虫实践记录，初次实践可能存在的问题还望各位指出，也希望能给正在学习的朋友提供一点思路，最后感谢各位浏览&lt;/em&gt;&lt;/p&gt;</content><author><name>JustX</name></author><category term="Node" /><summary type="html">##背景</summary></entry><entry><title type="html">程序员的浪漫</title><link href="http://justx.cn:8088/node/" rel="alternate" type="text/html" title="程序员的浪漫" /><published>2019-03-01T22:45:28+08:00</published><updated>2019-03-01T22:45:28+08:00</updated><id>http://justx.cn:8088/node</id><content type="html" xml:base="http://justx.cn:8088/node/">&lt;section&gt;
+&lt;h3&gt;前言&lt;/h3&gt;
+    &lt;p&gt;
+        在一段紧张的项目时光后，突发想起之前被搁置的Node学习之旅，于是乎浏览各大网站的学习资源，被一个标题&lt;a href=&quot;https://github.com/Vincedream/NodeMail&quot; target=&quot;_blank&quot;&gt;《用Node写一个爬虫脚本每天定时给女朋友发一封暖心邮件》&lt;/a&gt;吸引，于是开始着手实现并写下此文巩固知识点
+    &lt;/p&gt;
+&lt;/section&gt;
+
+&lt;h3&gt;效果图&lt;/h3&gt;
+
+&lt;figure class=&quot;half&quot;&gt;
+    
+    &lt;a href=&quot;http://justx.cn:8088/assets/img/emailDemo.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/emailDemo.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;h3&gt;需解决的问题及思路&lt;/h3&gt;
+&lt;section&gt;
+    &lt;ul&gt;
+		&lt;li&gt;
+            &lt;b&gt;爬虫:&lt;/b&gt;通过&lt;a href=&quot;https://www.npmjs.com/package/superagent&quot;&gt;superagent&lt;/a&gt;爬取天气/每日一句 的DOM并配合 &lt;a href=&quot;https://www.npmjs.com/package/cheerio&quot;&gt;cheerio&lt;/a&gt;解构需要的信息
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;b&gt;邮件内容构建:&lt;/b&gt;爬虫获取当日天气 + 每日一句(One一个)
+            &lt;pre&gt;
+            	&lt;code&gt;
+            	// spider 数据地址
+                    const oneUrl = &quot;http://wufazhuce.com/&quot;; //ONE的web版网站
+                    const WeatherUrl = &quot;https://tianqi.moji.com/weather/china/guangdong/&quot; + local; //天气地址
+                    // 获取天气， one一个同理
+					superagent.get(WeatherUrl).end(function (err, res) {
+                        if (err) {
+                            console.log('获取失败',err)
+                            reject(err)
+                        }
+                        let weatherTip = &quot;&quot;;
+                        let $ = cheerio.load(res.text);
+                        $(&quot;.wea_tips&quot;).each(function (i, elem) {
+                            weatherTip = $(elem)
+                                .find(&quot;em&quot;)
+                                .text();
+                        });
+                        resolve(weatherTip)
+                      });
+				&lt;/code&gt;
+				&lt;/pre&gt;
+                js计算出纪念日至今天数
+                &lt;pre&gt;
+                &lt;code&gt;
+                const startDay = &quot;2012/3/17&quot;;
+                let today = new Date();
+                let initDay = new Date(startDay);
+                let lastDay = Math.floor((today - initDay) / 1000 / 60 / 60 / 24);
+                let todaystr =
+                  today.getFullYear() +
+                  &quot; / &quot; +
+                  (today.getMonth() + 1) +
+                  &quot; / &quot; +
+                  today.getDate();
+                &lt;/code&gt;
+                &lt;/pre&gt;
+                或者添加一些你觉得浪漫的元素，最后通过&lt;a href=&quot;https://www.npmjs.com/package/ejs&quot;&gt;ejs&lt;/a&gt; [JavaScript模板引擎]动态构建邮件内容
+            &lt;pre&gt;
+            	&lt;code&gt;
+        //新建一个文件 mail.ejs内容就是带变量的html模板
+        //将目录下的mail.ejs获取到，得到一个模版
+        const template = ejs.compile(fs.readFileSync(path.resolve(__dirname, 'mail.ejs'), 'utf8'));
+        //将数据传入模版中，生成HTML
+        const html = template(HtmlData);
+        	&lt;/code&gt;
+        &lt;/pre&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;b&gt;如何发送邮件：&lt;/b&gt;通过配置&lt;a href=&quot;https://nodemailer.com/about/&quot;&gt;nodemailer&lt;/a&gt;进行邮件的发送
+        &lt;/li&gt;
+        &lt;li&gt;
+        &lt;b&gt;每天定时发送：&lt;/b&gt;这个最好是有个人的服务器可用，用电脑也行但是电脑总是会关机的，为了方便测试本人就在电脑上以访问接口的形式触发邮件发送，
+            &lt;pre&gt;
+            	&lt;code&gt;
+                // 发送
+                var fn_sendDtart = async function(ctx,next) {
+                    var res = await fn_sendEmail()
+                    if (res.messageId){
+                        ctx.response.body = '邮件发送成功！ID:' + res.messageId
+                    } else {
+                        // 提示或者重新发送
+                        ctx.response.body = '邮件发送失败！'
+                        // fn_sendDtart()
+                    }
+                }
+                // 对应接口  访问 localhost:3000/sendMail
+                module.exports = {
+                    'GET /sendMail': fn_sendDtart // 发送邮件接口，直接调用即可，或者放服务器写个node定时任务
+                }
+                // 如果此处看不懂说明你还没有好好的看廖雪峰老师的教程哦
+            	&lt;/code&gt;
+            &lt;/pre&gt;
+            反正最终目的达到就行，关于定时器可以看原作者的文章介绍，配置好定时触发就ok了
+        &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/section&gt;
+
+&lt;h3&gt;相关配置&lt;/h3&gt;
+&lt;section&gt;
+    &lt;p&gt;
+        node 初始化项目然后 npm i 安装下面的依赖，&lt;em&gt;至于没有基础的，个人建议先去通读一下&lt;a href=&quot;https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434501245426ad4b91f2b880464ba876a8e3043fc8ef000&quot; target=&quot;_blank&quot;&gt;廖雪峰老师的Node教程&lt;/a&gt;，不然敲起代码也是一抹黑 不知所以然，个人觉得廖雪峰老师的讲解简单易懂，花了一天的时间了解并搭建起基础框架最后对照需求实现，这样一整套下来知识才是属于自己的&lt;/em&gt;
+    &lt;/p&gt;
+    &lt;pre&gt;
+        &lt;code&gt;
+          &quot;dependencies&quot;: {
+            &quot;cheerio&quot;: &quot;^1.0.0-rc.2&quot;,
+            &quot;ejs&quot;: &quot;^2.6.1&quot;,
+            &quot;koa&quot;: &quot;^2.7.0&quot;,
+            &quot;koa-bodyparser&quot;: &quot;^4.2.1&quot;,
+            &quot;koa-router&quot;: &quot;^7.4.0&quot;,
+            &quot;mime-types&quot;: &quot;^2.1.22&quot;,
+            &quot;mz&quot;: &quot;^2.7.0&quot;,
+            &quot;nodemailer&quot;: &quot;^5.1.1&quot;,
+            &quot;nunjucks&quot;: &quot;^3.1.7&quot;,
+            &quot;superagent&quot;: &quot;^4.1.0&quot;
+          }
+        &lt;/code&gt;
+    &lt;/pre&gt;
+&lt;/section&gt;
+
+&lt;h3&gt;详细教程&lt;/h3&gt;
+
+&lt;section&gt;关于详细的实现步骤，我觉得参考&lt;a href=&quot;https://github.com/Vincedream/NodeMail&quot;&gt;原作者&lt;/a&gt;的就可以了，也是尊重原作者的劳动成果，最后感谢原作者带来的学习教程，大家赶紧去给自己的女朋友一个小小的惊喜吧❤️&lt;/section&gt;</content><author><name>JustX</name></author><category term="Node" /><category term="JavaScript" /><summary type="html">前言
+    
+        在一段紧张的项目时光后，突发想起之前被搁置的Node学习之旅，于是乎浏览各大网站的学习资源，被一个标题《用Node写一个爬虫脚本每天定时给女朋友发一封暖心邮件》吸引，于是开始着手实现并写下此文巩固知识点</summary></entry><entry><title type="html">从零开始搭建vue脚手架(一)</title><link href="http://justx.cn:8088/vuecli/" rel="alternate" type="text/html" title="从零开始搭建vue脚手架(一)" /><published>2018-12-19T19:45:28+08:00</published><updated>2018-12-19T19:45:28+08:00</updated><id>http://justx.cn:8088/vuecli</id><content type="html" xml:base="http://justx.cn:8088/vuecli/">&lt;h3 id=&quot;前言&quot;&gt;前言：&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;用vue也断断续续一年了，前前后后也做了四个项目，虽然项目正常的上线了，可心里始终觉得有些不足，从最开始就是直接使用&lt;code class=&quot;highlighter-rouge&quot;&gt;vue init webpack-simple project-name&lt;/code&gt;创建的项目，但操作过程太过简单和片面。根本没有去理解其中的逻辑，所以打算从零开始搭建vue的脚手架，进一步学习vue，谨以此文记录过程和学习心得&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;涉及的知识&quot;&gt;涉及的知识&lt;/h3&gt;</content><author><name>JustX</name></author><category term="Vue" /><category term="webpack" /><summary type="html">前言：</summary></entry><entry><title type="html">我又双叒叕搭建了自己的博客</title><link href="http://justx.cn:8088/first/" rel="alternate" type="text/html" title="我又双叒叕搭建了自己的博客" /><published>2018-12-05T01:34:34+08:00</published><updated>2018-12-05T01:34:34+08:00</updated><id>http://justx.cn:8088/first</id><content type="html" xml:base="http://justx.cn:8088/first/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
 &lt;p&gt;我终于再一次搭建了自己的blog（OS: 不对，我为什么要说又？）,好吧，我承认，作为一个程序猿，一直用印象笔记作为记录工具，总觉得有那么点对不起程序猿的称号(手动滑稽)，我不会承认我是因为懒的。
 这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用&lt;/p&gt;
 
 &lt;h2 id=&quot;搭建技术&quot;&gt;搭建技术&lt;/h2&gt;
-&lt;p&gt;博客使用的是 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速搭建的技术方案，非常便捷，搭配上主题简直高大上(😏)。
+&lt;p&gt;博客使用的是 &lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt; + &lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; 快速搭建的技术方案，非常便捷，搭配上主题简直高大上😏。
 至于教程，谷歌一下就好，我这种菜鸟就不误导大家了&lt;/p&gt;
 
 &lt;h2 id=&quot;最后附上自己喜欢的电影截图吧不然显得那么单薄&quot;&gt;最后附上自己喜欢的电影截图吧，不然显得那么单薄&lt;/h2&gt;
@@ -16,6 +268,92 @@
     &lt;figcaption&gt;图片转自网络，侵删&lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;—— X 记于 2018年12月04日18:11:38&lt;/p&gt;</content><author><name>X</name></author><category term="first" /><summary type="html">前言
+&lt;p&gt;—— X 记于 2018年12月04日18:11:38&lt;/p&gt;</content><author><name>JustX</name></author><category term="first" /><summary type="html">前言
 我终于再一次搭建了自己的blog（OS: 不对，我为什么要说又？）,好吧，我承认，作为一个程序猿，一直用印象笔记作为记录工具，总觉得有那么点对不起程序猿的称号(手动滑稽)，我不会承认我是因为懒的。
-这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用</summary></entry></feed>
+这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用</summary></entry><entry><title type="html">[小技巧]Vue本地局域网访问</title><link href="http://justx.cn:8088/vueNote820/" rel="alternate" type="text/html" title="[小技巧]Vue本地局域网访问" /><published>2018-08-20T18:24:14+08:00</published><updated>2018-08-20T18:24:14+08:00</updated><id>http://justx.cn:8088/vueNote820</id><content type="html" xml:base="http://justx.cn:8088/vueNote820/">&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;使用vue做移动端的项目，某些情况下在电脑上开启手机预览模式始终和真机有所区别，因此就想到手机是不是可以通过局域网直接访问&lt;/p&gt;
+
+&lt;h3&gt;步骤&lt;/h3&gt;
+&lt;ul&gt;
+    &lt;li&gt;首先确保手机和电脑在同一网络中&lt;/li&gt;
+	&lt;li&gt;
+        在config文件中找到 index.js 文件 中找到下面代码
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Paths&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;assetsSubDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'static'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;assetsPublicPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;proxyTable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{},&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0.0.0.0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 将此处localhost 修改为  '0.0.0.0'&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+    &lt;li&gt;
+        打开项目根目录的 package.json，然后找到脚本 scripts，在 dev 结尾增加一个参数 --host {本机ip}
+		mac 终端输入 ifconfig 
+		Windows cmd 输入 ipconfig
+		查看本机ip
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scripts&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;dev&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 你的ip&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;start&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;npm run dev&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;build&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;node build/build.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;build:report&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;npm_config_report=true npm run build&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;testbuild&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;node build/testbuild.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;lint&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eslint --ext .js,.vue src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;test&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;npm run lint&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;svgo&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;svgo -f src/icons/svg --config=src/icons/svgo.yml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;analyz&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;NODE_ENV=production npm_config_report=true npm run build&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+	&lt;li&gt;
+		最后手机访问 ip:port 即可在手机预览，再也不怕和手机端表现有出入了😁
+	&lt;/li&gt;
+&lt;ul&gt;
+
+谨以此文记录，希望能帮助到有需要的朋友
+&lt;/ul&gt;&lt;/ul&gt;</content><author><name>JustX</name></author><category term="Vue" /><summary type="html">问题背景</summary></entry><entry><title type="html">[问题记录]Vue数据更新不能触发view渲染</title><link href="http://justx.cn:8088/vueNote408/" rel="alternate" type="text/html" title="[问题记录]Vue数据更新不能触发view渲染" /><published>2018-04-09T01:34:34+08:00</published><updated>2018-04-09T01:34:34+08:00</updated><id>http://justx.cn:8088/vueNote408</id><content type="html" xml:base="http://justx.cn:8088/vueNote408/">&lt;h2&gt;vue数组更新检测机制&lt;/h2&gt;
+
+&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;接触vue大概四个多月了，今天在写vue项目的时候突然出现了data中某对象数据更新但是没有触发view重渲染，大致代码如下&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newVal&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;于是查阅手册发现了如下一段内容&lt;/p&gt;
+
+&lt;figure class=&quot;half&quot;&gt;
+    
+    &lt;a href=&quot;http://justx.cn:8088/assets/img/vuenote1.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/vuenote1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;a href=&quot;​&quot;&gt;&lt;img src=&quot;​&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;a href=&quot;http://justx.cn:8088/assets/img/vuenote2.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/vuenote2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    
+    &lt;figcaption&gt;图片引用于vue官方手册&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;原来是这种方式没法触发vue的更新机制，最后使用 $set 解决问题&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;indexOfItem&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;newValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;谨以此文记录，希望能帮助到碰到同样问题的朋友&lt;/p&gt;</content><author><name>JustX</name></author><category term="Vue" /><category term="Note" /><summary type="html">vue数组更新检测机制</summary></entry></feed>
