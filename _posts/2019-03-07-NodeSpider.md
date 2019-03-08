@@ -23,13 +23,10 @@ comments: true
 
 <ul>
 	<li>首先创建目录，新建app.js文件,安装相关依赖</li>
-    <pre>
-    	<code>
-    		npm i superagent cheerio fs
-    	</code>
-    </pre>
-    </li>
 </ul>
+```js
+    npm i superagent cheerio fs
+```
 </section>
 
 
@@ -47,7 +44,6 @@ comments: true
 	<li>通过superagent发送http请求获取资源，拿到html</li>
     <li>cheerio 是node.js的jquery库通过这个解析DOM，</li>
     <li>fs 就用于新建文件夹和保存文件</li>
-    </li>
 </ul>
 <section>
 大致流程就如上所说，现在找一个自己想要爬取的网站，我这里用的是
