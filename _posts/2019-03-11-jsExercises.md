@@ -6,9 +6,10 @@ author: "JustX"
 header-img: "assets/img/dhxy1.jpg"
 tags: [JavaScript]
 comments: true
+
 ---
 
-##<em>练习集</em>
+<em>练习集</em>
 
 1.写一个闭包，每次调用自增1
 
