@@ -13,20 +13,23 @@ comments: true
 
 1.写一个闭包，每次调用自增1
 
-
-
+```js
 var add = (function increase() {
     var tmp = 0;
     return function () {
         console.log(++tmp);
     }
 })()
-add();
+add()
+```
 
 2.递归计算阶乘
 
+```js
 function num(n){
     if(n==1) return 1;
     return num(n-1)*n;
 }
-num(100);
+num(100)
+```
+
