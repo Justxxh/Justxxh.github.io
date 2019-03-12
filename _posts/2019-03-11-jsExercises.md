@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "日常js练习【持续更新ing】"
-date: 2019-03-11 18:49:20
+date: 2019-03-10 18:49:20
 author: "JustX"
 header-img: "assets/img/dhxy1.jpg"
 tags: [JavaScript]
