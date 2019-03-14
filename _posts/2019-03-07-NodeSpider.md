@@ -118,7 +118,7 @@ superagent.get(url)
 ## 成果
 
 {% capture images %}
-    http://justx.cn:8088/assets/img/0308-1.png
+    http://justx.cn/assets/img/0308-1.png
 {% endcapture %}
 {% include gallery images=images caption="" cols=2 %}
 

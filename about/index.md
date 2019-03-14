@@ -20,6 +20,6 @@ comments: false
 
 ## 此处应有自拍
 {% capture images %}
-    http://justx.cn:8088/assets/img/photo.jpg
+    http://justx.cn/assets/img/photo.jpg
 {% endcapture %}
 {% include gallery images=images caption="图片转自网络，侵删" cols=2 %}

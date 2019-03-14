@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://justx.cn:8088/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://justx.cn:8088/feed.xml" rel="self" type="application/atom+xml" /><link href="http://justx.cn:8088/" rel="alternate" type="text/html" /><updated>2019-03-08T13:13:32+08:00</updated><id>http://justx.cn:8088/</id><title type="html">JustX</title><subtitle>没有代码就没有伤害 （°Д°）</subtitle><entry><title type="html">[Node 爬虫]快速制作自己的桌面壁纸</title><link href="http://justx.cn:8088/NodeSpider/" rel="alternate" type="text/html" title="[Node 爬虫]快速制作自己的桌面壁纸" /><published>2019-03-08T07:50:40+08:00</published><updated>2019-03-08T07:50:40+08:00</updated><id>http://justx.cn:8088/NodeSpider</id><content type="html" xml:base="http://justx.cn:8088/NodeSpider/">&lt;p&gt;##背景&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://justx.cn/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.2.1">Jekyll</generator><link href="http://justx.cn/feed.xml" rel="self" type="application/atom+xml" /><link href="http://justx.cn/" rel="alternate" type="text/html" /><updated>2019-03-08T13:13:32+08:00</updated><id>http://justx.cn/</id><title type="html">JustX</title><subtitle>没有代码就没有伤害 （°Д°）</subtitle><entry><title type="html">[Node 爬虫]快速制作自己的桌面壁纸</title><link href="http://justx.cn/NodeSpider/" rel="alternate" type="text/html" title="[Node 爬虫]快速制作自己的桌面壁纸" /><published>2019-03-08T07:50:40+08:00</published><updated>2019-03-08T07:50:40+08:00</updated><id>http://justx.cn/NodeSpider</id><content type="html" xml:base="http://justx.cn/NodeSpider/">&lt;p&gt;##背景&lt;/p&gt;
 
 &lt;p&gt;这几天家用台式机莫名卡顿，直至某晚女友看到我wallpaper engine那骚气的壁纸时说了一句：真丑，我帮你换几张壁纸吧。 就在她一顿百度之后 准备另存为，突然就各种卡死崩溃，强制关掉浏览器之后再次操作依旧如此，我一顿排查无果，恰好最近觉得电脑很奇怪，最后只能启用终极方案—— 重装大法，经过一顿操作 安装各种驱动，常用软件及游戏的下载，最终搞定，可是细看总觉得哪里不对，猛然想起，原来是这该死的默认壁纸拉低了我的档次，之前心爱的搜狗壁纸也停止维护，主要也是不想安装一堆软件，于是乎开始了壁纸的搜索，女友在知乎上找到很多好看的壁纸，无奈回答里都是直接发图没有网盘链接，看着这191张图片（我怎么会一个个书，当然是是爬虫下载的时候统计的[Smirk]），这要一个个保存得到什么时候去，于是就有了后面的故事…&lt;/p&gt;
 
@@ -109,13 +109,13 @@
 
 &lt;figure class=&quot;half&quot;&gt;
     
-    &lt;a href=&quot;http://justx.cn:8088/assets/img/0308-1.png&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/0308-1.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;http://justx.cn/assets/img/0308-1.png&quot;&gt;&lt;img src=&quot;http://justx.cn/assets/img/0308-1.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
     &lt;figcaption&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Windows壁纸设置为相册 随机模式即可，运行程序几秒拥有自己的壁纸集
-&lt;em&gt;&lt;mark&gt;tips：&lt;/mark&gt;以上为本次爬虫实践记录，初次实践可能存在的问题还望各位指出，也希望能给正在学习的朋友提供一点思路，最后感谢各位浏览&lt;/em&gt;&lt;/p&gt;</content><author><name>JustX</name></author><category term="Node" /><summary type="html">##背景</summary></entry><entry><title type="html">程序员的浪漫</title><link href="http://justx.cn:8088/node/" rel="alternate" type="text/html" title="程序员的浪漫" /><published>2019-03-01T22:45:28+08:00</published><updated>2019-03-01T22:45:28+08:00</updated><id>http://justx.cn:8088/node</id><content type="html" xml:base="http://justx.cn:8088/node/">&lt;section&gt;
+&lt;em&gt;&lt;mark&gt;tips：&lt;/mark&gt;以上为本次爬虫实践记录，初次实践可能存在的问题还望各位指出，也希望能给正在学习的朋友提供一点思路，最后感谢各位浏览&lt;/em&gt;&lt;/p&gt;</content><author><name>JustX</name></author><category term="Node" /><summary type="html">##背景</summary></entry><entry><title type="html">程序员的浪漫</title><link href="http://justx.cn/node/" rel="alternate" type="text/html" title="程序员的浪漫" /><published>2019-03-01T22:45:28+08:00</published><updated>2019-03-01T22:45:28+08:00</updated><id>http://justx.cn/node</id><content type="html" xml:base="http://justx.cn/node/">&lt;section&gt;
 &lt;h3&gt;前言&lt;/h3&gt;
     &lt;p&gt;
         在一段紧张的项目时光后，突发想起之前被搁置的Node学习之旅，于是乎浏览各大网站的学习资源，被一个标题&lt;a href=&quot;https://github.com/Vincedream/NodeMail&quot; target=&quot;_blank&quot;&gt;《用Node写一个爬虫脚本每天定时给女朋友发一封暖心邮件》&lt;/a&gt;吸引，于是开始着手实现并写下此文巩固知识点
@@ -126,7 +126,7 @@
 
 &lt;figure class=&quot;half&quot;&gt;
     
-    &lt;a href=&quot;http://justx.cn:8088/assets/img/emailDemo.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/emailDemo.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;http://justx.cn/assets/img/emailDemo.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn/assets/img/emailDemo.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
     &lt;figcaption&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -244,13 +244,13 @@
 
 &lt;section&gt;关于详细的实现步骤，我觉得参考&lt;a href=&quot;https://github.com/Vincedream/NodeMail&quot;&gt;原作者&lt;/a&gt;的就可以了，也是尊重原作者的劳动成果，最后感谢原作者带来的学习教程，大家赶紧去给自己的女朋友一个小小的惊喜吧❤️&lt;/section&gt;</content><author><name>JustX</name></author><category term="Node" /><category term="JavaScript" /><summary type="html">前言
     
-        在一段紧张的项目时光后，突发想起之前被搁置的Node学习之旅，于是乎浏览各大网站的学习资源，被一个标题《用Node写一个爬虫脚本每天定时给女朋友发一封暖心邮件》吸引，于是开始着手实现并写下此文巩固知识点</summary></entry><entry><title type="html">从零开始搭建vue脚手架(一)</title><link href="http://justx.cn:8088/vuecli/" rel="alternate" type="text/html" title="从零开始搭建vue脚手架(一)" /><published>2018-12-19T19:45:28+08:00</published><updated>2018-12-19T19:45:28+08:00</updated><id>http://justx.cn:8088/vuecli</id><content type="html" xml:base="http://justx.cn:8088/vuecli/">&lt;h3 id=&quot;前言&quot;&gt;前言：&lt;/h3&gt;
+        在一段紧张的项目时光后，突发想起之前被搁置的Node学习之旅，于是乎浏览各大网站的学习资源，被一个标题《用Node写一个爬虫脚本每天定时给女朋友发一封暖心邮件》吸引，于是开始着手实现并写下此文巩固知识点</summary></entry><entry><title type="html">从零开始搭建vue脚手架(一)</title><link href="http://justx.cn/vuecli/" rel="alternate" type="text/html" title="从零开始搭建vue脚手架(一)" /><published>2018-12-19T19:45:28+08:00</published><updated>2018-12-19T19:45:28+08:00</updated><id>http://justx.cn/vuecli</id><content type="html" xml:base="http://justx.cn/vuecli/">&lt;h3 id=&quot;前言&quot;&gt;前言：&lt;/h3&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;用vue也断断续续一年了，前前后后也做了四个项目，虽然项目正常的上线了，可心里始终觉得有些不足，从最开始就是直接使用&lt;code class=&quot;highlighter-rouge&quot;&gt;vue init webpack-simple project-name&lt;/code&gt;创建的项目，但操作过程太过简单和片面。根本没有去理解其中的逻辑，所以打算从零开始搭建vue的脚手架，进一步学习vue，谨以此文记录过程和学习心得&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;涉及的知识&quot;&gt;涉及的知识&lt;/h3&gt;</content><author><name>JustX</name></author><category term="Vue" /><category term="webpack" /><summary type="html">前言：</summary></entry><entry><title type="html">我又双叒叕搭建了自己的博客</title><link href="http://justx.cn:8088/first/" rel="alternate" type="text/html" title="我又双叒叕搭建了自己的博客" /><published>2018-12-05T01:34:34+08:00</published><updated>2018-12-05T01:34:34+08:00</updated><id>http://justx.cn:8088/first</id><content type="html" xml:base="http://justx.cn:8088/first/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
+&lt;h3 id=&quot;涉及的知识&quot;&gt;涉及的知识&lt;/h3&gt;</content><author><name>JustX</name></author><category term="Vue" /><category term="webpack" /><summary type="html">前言：</summary></entry><entry><title type="html">我又双叒叕搭建了自己的博客</title><link href="http://justx.cn/first/" rel="alternate" type="text/html" title="我又双叒叕搭建了自己的博客" /><published>2018-12-05T01:34:34+08:00</published><updated>2018-12-05T01:34:34+08:00</updated><id>http://justx.cn/first</id><content type="html" xml:base="http://justx.cn/first/">&lt;h2 id=&quot;前言&quot;&gt;前言&lt;/h2&gt;
 &lt;p&gt;我终于再一次搭建了自己的blog（OS: 不对，我为什么要说又？）,好吧，我承认，作为一个程序猿，一直用印象笔记作为记录工具，总觉得有那么点对不起程序猿的称号(手动滑稽)，我不会承认我是因为懒的。
 这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用&lt;/p&gt;
 
@@ -263,14 +263,14 @@
 
 &lt;figure class=&quot;half&quot;&gt;
     
-    &lt;a href=&quot;http://justx.cn:8088/assets/img/dhxy1.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/dhxy1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;http://justx.cn/assets/img/dhxy1.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn/assets/img/dhxy1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
     &lt;figcaption&gt;图片转自网络，侵删&lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;—— X 记于 2018年12月04日18:11:38&lt;/p&gt;</content><author><name>JustX</name></author><category term="first" /><summary type="html">前言
 我终于再一次搭建了自己的blog（OS: 不对，我为什么要说又？）,好吧，我承认，作为一个程序猿，一直用印象笔记作为记录工具，总觉得有那么点对不起程序猿的称号(手动滑稽)，我不会承认我是因为懒的。
-这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用</summary></entry><entry><title type="html">[小技巧]Vue本地局域网访问</title><link href="http://justx.cn:8088/vueNote820/" rel="alternate" type="text/html" title="[小技巧]Vue本地局域网访问" /><published>2018-08-20T18:24:14+08:00</published><updated>2018-08-20T18:24:14+08:00</updated><id>http://justx.cn:8088/vueNote820</id><content type="html" xml:base="http://justx.cn:8088/vueNote820/">&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
+这次换了一个新的github账号用来专门写博客的，你问我为什么不用虚拟机？ 哼，这就触及到我钱包厚度了， 好吧，其实是个人觉得github page对于我这种菜鸟完全够用</summary></entry><entry><title type="html">[小技巧]Vue本地局域网访问</title><link href="http://justx.cn/vueNote820/" rel="alternate" type="text/html" title="[小技巧]Vue本地局域网访问" /><published>2018-08-20T18:24:14+08:00</published><updated>2018-08-20T18:24:14+08:00</updated><id>http://justx.cn/vueNote820</id><content type="html" xml:base="http://justx.cn/vueNote820/">&lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
 
 &lt;p&gt;使用vue做移动端的项目，某些情况下在电脑上开启手机预览模式始终和真机有所区别，因此就想到手机是不是可以通过局域网直接访问&lt;/p&gt;
 
@@ -325,7 +325,7 @@
 &lt;ul&gt;
 
 谨以此文记录，希望能帮助到有需要的朋友
-&lt;/ul&gt;&lt;/ul&gt;</content><author><name>JustX</name></author><category term="Vue" /><summary type="html">问题背景</summary></entry><entry><title type="html">[问题记录]Vue数据更新不能触发view渲染</title><link href="http://justx.cn:8088/vueNote408/" rel="alternate" type="text/html" title="[问题记录]Vue数据更新不能触发view渲染" /><published>2018-04-09T01:34:34+08:00</published><updated>2018-04-09T01:34:34+08:00</updated><id>http://justx.cn:8088/vueNote408</id><content type="html" xml:base="http://justx.cn:8088/vueNote408/">&lt;h2&gt;vue数组更新检测机制&lt;/h2&gt;
+&lt;/ul&gt;&lt;/ul&gt;</content><author><name>JustX</name></author><category term="Vue" /><summary type="html">问题背景</summary></entry><entry><title type="html">[问题记录]Vue数据更新不能触发view渲染</title><link href="http://justx.cn/vueNote408/" rel="alternate" type="text/html" title="[问题记录]Vue数据更新不能触发view渲染" /><published>2018-04-09T01:34:34+08:00</published><updated>2018-04-09T01:34:34+08:00</updated><id>http://justx.cn/vueNote408</id><content type="html" xml:base="http://justx.cn/vueNote408/">&lt;h2&gt;vue数组更新检测机制&lt;/h2&gt;
 
 &lt;h2 id=&quot;问题背景&quot;&gt;问题背景&lt;/h2&gt;
 
@@ -341,11 +341,11 @@
 
 &lt;figure class=&quot;half&quot;&gt;
     
-    &lt;a href=&quot;http://justx.cn:8088/assets/img/vuenote1.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/vuenote1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;http://justx.cn/assets/img/vuenote1.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn/assets/img/vuenote1.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
     &lt;a href=&quot;​&quot;&gt;&lt;img src=&quot;​&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
-    &lt;a href=&quot;http://justx.cn:8088/assets/img/vuenote2.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn:8088/assets/img/vuenote2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
+    &lt;a href=&quot;http://justx.cn/assets/img/vuenote2.jpg&quot;&gt;&lt;img src=&quot;http://justx.cn/assets/img/vuenote2.jpg&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;
     
     &lt;figcaption&gt;图片引用于vue官方手册&lt;/figcaption&gt;
 &lt;/figure&gt;
