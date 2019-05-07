@@ -33,3 +33,54 @@ function num(n){
 num(100)
 ```
 
+3.词法作用域（js采用该种）与动态作用域
+
+> 来源 《你不知道的JavaScript上卷》- 作用域章节
+
+```js
+function foo(){
+	console.log(a);
+}
+function bar(){
+	var a = 3;
+	foo();
+}
+var a = 2;
+bar()
+// 答案 2
+// 假设在动态作用域 答案则为 3
+```
+
+```js
+function foo(a){
+	var b = a * 2;
+	function bar(c){
+		console.log(a,b,c)
+	}
+	bar(b*3);
+}
+foo(2);
+// 2 4 12
+```
+
+```js
+// eg1
+function foo(str,a){
+	eval(str);
+	console.log(a, b);
+}
+var b = 2
+foo("var b = 3", 1)
+// 1 3
+
+// eg2
+
+function foo(str){
+  "use strict";
+	eval(str);
+	console.log(a);
+}
+foo("var a = 2");
+//在严格模式下 eval 运行时有自己的词法作用域因此其中的声明无法修改所在的作用域，则抛出：ReferenceError: a is not defined
+```
+
